@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--启动页面动画-->
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <fade
+        android:duration="618">
+    </fade>
+</transitionSet>
