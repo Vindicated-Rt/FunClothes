@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.mystery.funclothes.Activity.CameraActivity;
+import com.mystery.funclothes.Base.BaseURL;
 import com.mystery.funclothes.Bean.ScenesInfo;
 import com.mystery.funclothes.R;
 
@@ -45,9 +48,9 @@ public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent startCamera = new Intent(v.getContext(), CameraActivity.class);
-                Bundle bundle= ActivityOptions.makeSceneTransitionAnimation((Activity) v.getContext(), v, "sharedView").toBundle();
-                startCamera.putExtra("postion", postion);
-                v.getContext().startActivity(startCamera,bundle);
+                ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CAMERA)
+                        .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(), v, "sharedView"))
+                        .withInt("postion",postion).navigation(v.getContext());
             }
         });
 

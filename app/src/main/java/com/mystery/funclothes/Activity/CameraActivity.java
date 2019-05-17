@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cazaea.sweetalert.SweetAlertDialog;
 import com.hanks.htextview.fade.FadeTextView;
 import com.hanks.htextview.typer.TyperTextView;
@@ -37,6 +38,7 @@ import java.io.IOException;
  * 并链接至相机拍照（待完成）
  */
 
+@Route(path = "/activities/camera")
 public class CameraActivity extends AppCompatActivity implements CameraView {
 
     /*跳转页面标识符*/
@@ -122,8 +124,9 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     }
 
     @Override
-    public void setBackground() {
-
+    public void setBackground(Bitmap background) {
+        Drawable drawable = new BitmapDrawable(getResources(),background);
+        cameraScenesIv.setBackground(drawable);
     }
 
     /*相册或相机返回图片*/
@@ -133,16 +136,12 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         switch (requestCode) {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
-                    Bitmap bitmap = BitmapFactoryUtil.getBitmapByUri(this,imageUri,1920,1080);
-                    Drawable drawable = new BitmapDrawable(getResources(),bitmap);
-                    cameraScenesIv.setBackground(drawable);
+                    setBackground(BitmapFactoryUtil.getBitmapByUri(this,imageUri,1920,1080));
                 }
                 break;
             case CHOOSE_PHOTO:
                 if (resultCode == RESULT_OK) {
-                    Bitmap bitmap = cameraPresenter.handleImage(data);
-                    Drawable drawable = new BitmapDrawable(getResources(),bitmap);
-                    cameraScenesIv.setBackground(drawable);
+                    setBackground(cameraPresenter.handleImage(data));
                 }
                 break;
             default:

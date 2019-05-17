@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mystery.funclothes.Presenter.ScenesPresenter;
 import com.mystery.funclothes.R;
 
@@ -13,7 +14,7 @@ import com.mystery.funclothes.R;
  * 选择场景页面
  * 显示各种场景
  */
-
+@Route(path = "/activities/scenes")
 public class ScenesActivity extends AppCompatActivity {
 
     @Override
