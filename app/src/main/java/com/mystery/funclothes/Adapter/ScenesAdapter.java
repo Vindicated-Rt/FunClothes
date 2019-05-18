@@ -61,6 +61,7 @@ public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder
         return scenesInfo.getSize();
     }
 
+    /*ItemView -- CardView*/
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView scenesImage;
         public TextView scenesDescription;
