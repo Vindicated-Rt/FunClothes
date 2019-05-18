@@ -10,6 +10,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
 import com.mystery.funclothes.Activity.CameraActivity;
+import com.mystery.funclothes.Base.BaseURL;
 import com.mystery.funclothes.Model.CameraModel;
 import com.mystery.funclothes.Util.BitmapFactoryUtil;
 
@@ -32,21 +33,20 @@ public class CameraPresenter implements CameraModel{
         this.mContext = mContext;
     }
 
-    /*从图库获取图片*/
+    /*从图库获取图片路径转换为位图*/
     @Override
     public Bitmap handleImage(Intent data) {
         String imagePath = null;
         Uri uri = data.getData();
-
         if (DocumentsContract.isDocumentUri(mContext, uri)) {
             String docId = DocumentsContract.getDocumentId(uri);
-            if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
+            if (BaseURL.DOCUMENTS_URL.equals(uri.getAuthority())) {
                 String id = docId.split(":")[1];
                 String selection = MediaStore.Images.Media._ID + "=" + id;
                 imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
-            } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
+            } else if (BaseURL.DOWNLOADS_URL.equals(uri.getAuthority())) {
                 Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"),
+                        Uri.parse(BaseURL.CONTENT_DOWNLOADS_URL),
                         Long.valueOf(docId));
                 imagePath = getImagePath(contentUri, null);
             }
@@ -68,6 +68,16 @@ public class CameraPresenter implements CameraModel{
             cursor.close();
         }
         return path;
+    }
+
+    @Override
+    public void openAlbum() {
+
+    }
+
+    @Override
+    public void openCamera() {
+
     }
 
     /*获取当前时间*/
