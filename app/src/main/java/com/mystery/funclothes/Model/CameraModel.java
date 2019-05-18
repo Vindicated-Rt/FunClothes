@@ -8,6 +8,4 @@ import android.net.Uri;
 public interface CameraModel {
     Bitmap handleImage(Intent data);
     String getImagePath(Uri uri, String selection);
-    void openAlbum();
-    void openCamera();
 }

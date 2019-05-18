@@ -70,16 +70,6 @@ public class CameraPresenter implements CameraModel{
         return path;
     }
 
-    @Override
-    public void openAlbum() {
-
-    }
-
-    @Override
-    public void openCamera() {
-
-    }
-
     /*获取当前时间*/
     public String getTime() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH:mm:ss", Locale.getDefault());

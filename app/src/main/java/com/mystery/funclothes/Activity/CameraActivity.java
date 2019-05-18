@@ -17,10 +17,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cazaea.sweetalert.SweetAlertDialog;
 import com.hanks.htextview.fade.FadeTextView;
 import com.hanks.htextview.typer.TyperTextView;
+import com.mystery.funclothes.Base.BaseURL;
 import com.mystery.funclothes.Bean.ScenesInfo;
 import com.mystery.funclothes.Presenter.CameraPresenter;
 import com.mystery.funclothes.R;
@@ -38,7 +41,7 @@ import java.io.IOException;
  * 并链接至相机拍照（待完成）
  */
 
-@Route(path = "/activities/camera")
+@Route(path = BaseURL.ACTIVITY_URL_CAMERA)
 public class CameraActivity extends AppCompatActivity implements CameraView {
 
     /*跳转页面标识符*/
@@ -50,6 +53,7 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     private ImageView cameraScenesIv;
     private CameraPresenter cameraPresenter;
     private Uri imageUri;
+    @Autowired int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +64,12 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
 
     /*初始化视图，设置视图数据*/
     private void initView() {
-        ScenesInfo scenesInfo = ScenesInfo.getInstance();
+        ARouter.getInstance().inject(this);
         cameraScenceTv = findViewById(R.id.camera_scenes_tv);
         scenceDesTv = findViewById(R.id.camera_scence_Des_tv);
         cameraScenesIv = findViewById(R.id.camera_scenes_iv);
         cameraPresenter = new CameraPresenter(this);
-        int postion = getIntent().getIntExtra("postion", 0);
-        setData(scenesInfo, postion);
+        setData(ScenesInfo.getInstance(), position);
     }
 
     /*相机按钮点击时间*/
@@ -151,7 +154,7 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
 
     /*打开相册*/
     private void openAlbum() {
-        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        Intent intent = new Intent(BaseURL.INTENT_URL_GETCONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, CHOOSE_PHOTO);
     }
@@ -165,11 +168,11 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
             e.printStackTrace();
         }
         if (Build.VERSION.SDK_INT >= 24) {
-            imageUri = FileProvider.getUriForFile(CameraActivity.this, "com.mystery.funclothes.fileprovider", storeImage);
+            imageUri = FileProvider.getUriForFile(CameraActivity.this, BaseURL.PACKAGE_FILEPROVIDER, storeImage);
         } else {
             imageUri = Uri.fromFile(storeImage);
         }
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        Intent intent = new Intent(BaseURL.INTENT_URL_IMAGECAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, TAKE_PHOTO);
     }

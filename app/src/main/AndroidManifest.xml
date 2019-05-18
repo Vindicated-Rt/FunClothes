@@ -9,25 +9,23 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".Base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".Base.BaseApplication"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
-        <meta-data
-            android:name="design_width_in_dp"
-            android:value="360" />
-        <meta-data
-            android:name="design_height_in_dp"
-            android:value="640" />
+
+        <activity android:name=".Activity.ChooseActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:ignore="InnerclassSeparator"/>
+
         <activity
             android:name=".Activity.CameraActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            tools:ignore="InnerclassSeparator"
-            />
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activity.ScenesActivity"
             android:theme="@style/ScenesTheme"
@@ -42,6 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.mystery.funclothes.fileprovider"
@@ -51,6 +50,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640" />
     </application>
 
 </manifest>

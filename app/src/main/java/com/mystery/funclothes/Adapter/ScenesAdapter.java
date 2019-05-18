@@ -43,14 +43,14 @@ public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
         viewHolder.scenesImage.setBackgroundResource(scenesInfo.getImageId(i));
         viewHolder.scenesDescription.setText(scenesInfo.getTitle(i));
-        final int postion = i;
+        final int position = i;
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent startCamera = new Intent(v.getContext(), CameraActivity.class);
                 ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CAMERA)
                         .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(), v, "sharedView"))
-                        .withInt("postion",postion).navigation(v.getContext());
+                        .withInt("position",position).navigation(v.getContext());
             }
         });
 

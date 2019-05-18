@@ -15,7 +15,7 @@ import com.mystery.funclothes.Base.BaseURL;
  * 启动页面
  * 显示图标
  */
-@Route(path = "/activities/splash")
+@Route(path = BaseURL.ACTIVITY_URL_SPLASH)
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ARouter.getInstance().build(BaseURL.ACTIVITY_URL_SCENES)
+                ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE)
                         .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation(SplashActivity.this))
                         .navigation(SplashActivity.this);
                 finish();
