@@ -27,10 +27,8 @@ public class ScenesPresenter implements ScenesModel {
     /*初始化 recyclerView 数据*/
     @Override
     public void initDatas() {
-        ScenesInfo scenesInfos = ScenesInfo.getInstance();
-        ScenesAdapter scenesAdapter = new ScenesAdapter(scenesInfos);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRecyclerView.setAdapter(scenesAdapter);
+        mRecyclerView.setAdapter(new ScenesAdapter(ScenesInfo.getInstance()));
         mRecyclerView.addItemDecoration(new ItemDecorationUtil(20));
     }
 }
