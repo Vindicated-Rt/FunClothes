@@ -1,26 +1,18 @@
 package com.mystery.funclothes.Activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.cazaea.sweetalert.SweetAlertDialog;
 import com.hanks.htextview.fade.FadeTextView;
 import com.hanks.htextview.typer.TyperTextView;
 import com.mystery.funclothes.Base.BaseURL;
@@ -29,9 +21,6 @@ import com.mystery.funclothes.Presenter.CameraPresenter;
 import com.mystery.funclothes.R;
 import com.mystery.funclothes.Util.BitmapFactoryUtil;
 import com.mystery.funclothes.View.CameraView;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Vindicated-Rt
@@ -51,30 +40,17 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     private FadeTextView cameraScenceTv;
     private TyperTextView scenceDesTv;
     private ImageView cameraScenesIv;
+    private ImageView cameraRecommendIv;
+    private ImageView cmaeraChooseIv;
     private CameraPresenter cameraPresenter;
-    private Uri imageUri;
-    @Autowired int position;
+    @Autowired
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_layout);
         initView();
-    }
-
-    /*初始化视图，设置视图数据*/
-    private void initView() {
-        ARouter.getInstance().inject(this);
-        cameraScenceTv = findViewById(R.id.camera_scenes_tv);
-        scenceDesTv = findViewById(R.id.camera_scence_Des_tv);
-        cameraScenesIv = findViewById(R.id.camera_scenes_iv);
-        cameraPresenter = new CameraPresenter(this);
-        setData(ScenesInfo.getInstance(), position);
-    }
-
-    /*相机按钮点击时间*/
-    public void cameraBtnClick(View view) {
-        openDialog(view);
     }
 
     /*设置场景数据*/
@@ -85,51 +61,22 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         cameraScenesIv.setBackgroundResource(scenesInfo.getImageId(postion));
     }
 
-    /**
-     * 代码冗长，dialog也不能完全体现出效果，待重写DIY的Dialog
-     */
-    /*选择图片来源Dialog*/
     @Override
-    public void openDialog(View v) {
-        ActivityCompat.requestPermissions(CameraActivity.this,
-                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        new SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
-                .setTitleText("CHOOSE")
-                .setContentText("开始选择衣服")
-                .setCustomImage(R.mipmap.camera)
-                .setConfirmText("确定")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.cancel();
-                        new SweetAlertDialog(CameraActivity.this, SweetAlertDialog.WARNING_TYPE)
-                                .setTitleText("FROM WHERE!")
-                                .setConfirmText("相机")
-                                .setCancelText("相册")
-                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        Toast.makeText(CameraActivity.this, "相机", Toast.LENGTH_SHORT).show();
-                                        sweetAlertDialog.cancel();
-                                        openCamera();
-                                    }
-                                })
-                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        Toast.makeText(CameraActivity.this, "相册", Toast.LENGTH_SHORT).show();
-                                        sweetAlertDialog.cancel();
-                                        openAlbum();
-                                    }
-                                }).show();
-                    }
-                }).show();
+    public void setBackground(Bitmap background) {
+        Drawable drawable = new BitmapDrawable(getResources(), background);
+        cameraScenesIv.setBackground(drawable);
     }
 
     @Override
-    public void setBackground(Bitmap background) {
-        Drawable drawable = new BitmapDrawable(getResources(),background);
-        cameraScenesIv.setBackground(drawable);
+    public void setVisibility(Boolean flag) {
+        if (flag){
+            cmaeraChooseIv.setVisibility(View.GONE);
+            cameraRecommendIv.setVisibility(View.VISIBLE);
+        }else {
+            cmaeraChooseIv.setVisibility(View.VISIBLE);
+            cameraRecommendIv.setVisibility(View.GONE);
+        }
+
     }
 
     /*相册或相机返回图片*/
@@ -139,12 +86,14 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         switch (requestCode) {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
-                    setBackground(BitmapFactoryUtil.getBitmapByUri(this,imageUri,1920,1080));
+                    setBackground(BitmapFactoryUtil.getBitmapByUri(this, cameraPresenter.getImageUri(), 1920, 1080));
+                    setVisibility(true);
                 }
                 break;
             case CHOOSE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     setBackground(cameraPresenter.handleImage(data));
+                    setVisibility(true);
                 }
                 break;
             default:
@@ -152,28 +101,25 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         }
     }
 
-    /*打开相册*/
-    private void openAlbum() {
-        Intent intent = new Intent(BaseURL.INTENT_URL_GETCONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, CHOOSE_PHOTO);
+    /*初始化视图，设置视图数据*/
+    private void initView() {
+        ARouter.getInstance().inject(this);
+        cameraScenceTv = findViewById(R.id.camera_scenes_tv);
+        scenceDesTv = findViewById(R.id.camera_scence_Des_tv);
+        cameraScenesIv = findViewById(R.id.camera_scenes_iv);
+        cameraRecommendIv = findViewById(R.id.camera_recommend_iv);
+        cmaeraChooseIv = findViewById(R.id.camera_choose_iv);
+        cameraPresenter = new CameraPresenter(this,this);
+        setData(ScenesInfo.getInstance(), position);
     }
 
-    /*打开相机*/
-    private void openCamera() {
-        File storeImage = new File(getExternalCacheDir(), cameraPresenter.getTime() + ".jpg");
-        try {
-            storeImage.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (Build.VERSION.SDK_INT >= 24) {
-            imageUri = FileProvider.getUriForFile(CameraActivity.this, BaseURL.PACKAGE_FILEPROVIDER, storeImage);
-        } else {
-            imageUri = Uri.fromFile(storeImage);
-        }
-        Intent intent = new Intent(BaseURL.INTENT_URL_IMAGECAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(intent, TAKE_PHOTO);
+    /*相机按钮点击事件*/
+    public void cameraBtnClick(View view) {
+        cameraPresenter.openDialog(view);
+    }
+
+    /*推荐按钮点击事件*/
+    public void ClothesRecommend(View view) {
+        ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE).navigation();
     }
 }

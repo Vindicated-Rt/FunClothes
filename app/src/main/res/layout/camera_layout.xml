@@ -75,7 +75,7 @@
         app:typerSpeed="60" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/camera_choose_iv"
         android:onClick="cameraBtnClick"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -83,6 +83,21 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/camera_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/camera_recommend_iv"
+        android:onClick="ClothesRecommend"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_recommend"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ChooseActivity">
+    tools:context=".Activity.ChooseActivity"
+    android:clipChildren="false">
 
     <com.mystery.funclothes.Bean.BezierView
         android:id="@+id/bezierView"
@@ -14,17 +15,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+    <com.fashare.stack_layout.StackLayout
+        android:id="@+id/stack_layout"
+        android:layout_width="250dp"
+        android:layout_height="350dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/blue_btn_bg_color"
         app:layout_constraintBottom_toBottomOf="@+id/bezierView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+    </com.fashare.stack_layout.StackLayout>
 
 </android.support.constraint.ConstraintLayout>
