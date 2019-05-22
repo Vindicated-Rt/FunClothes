@@ -21,4 +21,8 @@
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
         <item name="android:windowEnterTransition">@transition/fade_transition</item>
     </style>
+
+    <style name="CameraDialogStytle">
+        <item name="android:windowEnterAnimation">@anim/camera_dialog_animation</item>
+    </style>
 </resources>

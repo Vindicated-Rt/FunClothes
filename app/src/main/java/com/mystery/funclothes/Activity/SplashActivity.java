@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ARouter.getInstance().build(BaseURL.ACTIVITY_URL_SCENES)
+                ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CAMERA)
                         .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation(SplashActivity.this))
                         .navigation(SplashActivity.this);
                 finish();

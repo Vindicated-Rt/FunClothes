@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.DocumentsContract;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.cazaea.sweetalert.SweetAlertDialog;
 import com.mystery.funclothes.Activity.CameraActivity;
 import com.mystery.funclothes.Base.BaseURL;
+import com.mystery.funclothes.Bean.CameraDialog;
 import com.mystery.funclothes.Model.CameraModel;
 import com.mystery.funclothes.R;
 import com.mystery.funclothes.Util.BitmapFactoryUtil;
@@ -100,7 +102,11 @@ public class CameraPresenter implements CameraModel{
      */
     /*选择图片来源Dialog*/
     public void openDialog(View v) {
-        ActivityCompat.requestPermissions((Activity) mContext,
+        CameraDialog cameraDialog = new CameraDialog(mContext,0);
+        cameraDialog.getWindow().setWindowAnimations(R.style.CameraDialogStytle);
+        cameraDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        cameraDialog.show();
+        /*ActivityCompat.requestPermissions((Activity) mContext,
                 new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         new SweetAlertDialog(mContext, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
                 .setTitleText("CHOOSE")
@@ -132,7 +138,7 @@ public class CameraPresenter implements CameraModel{
                                     }
                                 }).show();
                     }
-                }).show();
+                }).show();*/
     }
 
     /*打开相机*/
