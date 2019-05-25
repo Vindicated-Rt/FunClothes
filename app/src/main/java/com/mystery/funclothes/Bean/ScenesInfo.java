@@ -26,7 +26,7 @@ public class ScenesInfo {
     }
 
     /*单例模式唯一对象*/
-    public static ScenesInfo getInstance(){
+    public static ScenesInfo getInstance() {
         return instance;
     }
 

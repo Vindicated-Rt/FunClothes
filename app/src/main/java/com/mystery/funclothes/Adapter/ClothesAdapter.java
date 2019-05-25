@@ -17,7 +17,7 @@ public class ClothesAdapter extends StackLayout.Adapter<ClothesAdapter.ViewHolde
 
     private ScenesInfo scenesInfo;//场景数据对象
 
-    public ClothesAdapter (ScenesInfo scenesInfo){
+    public ClothesAdapter(ScenesInfo scenesInfo) {
         this.scenesInfo = scenesInfo;
     }
 
@@ -40,6 +40,7 @@ public class ClothesAdapter extends StackLayout.Adapter<ClothesAdapter.ViewHolde
     /*ItemView -- CardView*/
     public static class ViewHolder extends StackLayout.ViewHolder {
         public ImageView scenesImage;
+
         public ViewHolder(View itemView) {
             super(itemView);
             scenesImage = itemView.findViewById(R.id.choose_item_iv);

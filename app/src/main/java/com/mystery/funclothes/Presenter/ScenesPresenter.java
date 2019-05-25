@@ -3,6 +3,7 @@ package com.mystery.funclothes.Presenter;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import com.mystery.funclothes.Adapter.ScenesAdapter;
 import com.mystery.funclothes.Bean.ScenesInfo;
 import com.mystery.funclothes.Model.ScenesModel;

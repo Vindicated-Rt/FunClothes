@@ -25,7 +25,7 @@ public class ScenesActivity extends AppCompatActivity {
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         RecyclerView scenes_rv = findViewById(R.id.scenes_rl);
         ScenesPresenter scenesPresenter = new ScenesPresenter(this, scenes_rv);
         scenesPresenter.initDatas();

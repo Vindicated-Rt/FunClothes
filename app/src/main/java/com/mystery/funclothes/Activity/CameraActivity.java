@@ -69,10 +69,10 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
 
     @Override
     public void setVisibility(Boolean flag) {
-        if (flag){
+        if (flag) {
             cmaeraChooseIv.setVisibility(View.GONE);
             cameraRecommendIv.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             cmaeraChooseIv.setVisibility(View.VISIBLE);
             cameraRecommendIv.setVisibility(View.GONE);
         }
@@ -109,7 +109,7 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         cameraScenesIv = findViewById(R.id.camera_scenes_iv);
         cameraRecommendIv = findViewById(R.id.camera_recommend_iv);
         cmaeraChooseIv = findViewById(R.id.camera_choose_iv);
-        cameraPresenter = new CameraPresenter(this,this);
+        cameraPresenter = new CameraPresenter(this, this);
         setData(ScenesInfo.getInstance(), position);
     }
 

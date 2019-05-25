@@ -20,8 +20,8 @@ public class ItemDecorationUtil extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect,View view,RecyclerView parent,RecyclerView.State state) {
-        if (parent.getChildAdapterPosition(view) == 0){
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        if (parent.getChildAdapterPosition(view) == 0) {
             outRect.top = space;    //最上方item不设置间距
         }
         outRect.left = space;

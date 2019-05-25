@@ -2,7 +2,6 @@ package com.mystery.funclothes.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,7 +11,6 @@ import com.fashare.stack_layout.transformer.AlphaTransformer;
 import com.fashare.stack_layout.transformer.AngleTransformer;
 import com.fashare.stack_layout.transformer.StackPageTransformer;
 import com.mystery.funclothes.Adapter.ClothesAdapter;
-import com.mystery.funclothes.Adapter.ScenesAdapter;
 import com.mystery.funclothes.Base.BaseURL;
 import com.mystery.funclothes.Bean.ScenesInfo;
 import com.mystery.funclothes.R;
@@ -44,8 +42,8 @@ public class ChooseActivity extends AppCompatActivity {
         mStackLayout.setOnSwipeListener(new StackLayout.OnSwipeListener() {
             @Override
             public void onSwiped(View swipedView, int swipedItemPos, boolean isSwipeLeft, int itemLeft) {
-                String string = isSwipeLeft? "往左": "往右" + "移除" + ScenesInfo.getInstance().getTitle(swipedItemPos) + "." + "剩余" + itemLeft + "项";
-                Toast.makeText(ChooseActivity.this,string, LENGTH_SHORT).show();
+                String string = isSwipeLeft ? "往左" : "往右" + "移除" + ScenesInfo.getInstance().getTitle(swipedItemPos) + "." + "剩余" + itemLeft + "项";
+                Toast.makeText(ChooseActivity.this, string, LENGTH_SHORT).show();
             }
         });
     }

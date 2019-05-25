@@ -1,9 +1,7 @@
 package com.mystery.funclothes.Adapter;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,9 +27,10 @@ public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder
 
     private ScenesInfo scenesInfo;//场景数据对象
 
-    public ScenesAdapter (ScenesInfo scenesInfo){
+    public ScenesAdapter(ScenesInfo scenesInfo) {
         this.scenesInfo = scenesInfo;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.scenes_cardview, viewGroup, false);
@@ -50,7 +49,7 @@ public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder
                 Intent startCamera = new Intent(v.getContext(), CameraActivity.class);
                 ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CAMERA)
                         .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(), v, "sharedView"))
-                        .withInt("position",position).navigation(v.getContext());
+                        .withInt("position", position).navigation(v.getContext());
             }
         });
 
@@ -65,6 +64,7 @@ public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView scenesImage;
         public TextView scenesDescription;
+
         public ViewHolder(View itemView) {
             super(itemView);
             scenesImage = itemView.findViewById(R.id.scence_pic);
