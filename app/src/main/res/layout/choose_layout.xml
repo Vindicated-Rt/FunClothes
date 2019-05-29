@@ -4,29 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ChooseActivity"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    tools:context=".Activity.ChooseActivity">
 
-    <com.mystery.funclothes.Bean.BezierView
-        android:id="@+id/bezierView"
+    <link.fls.swipestack.SwipeStack
+        android:id="@+id/swipeStack"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
+        android:layout_height="425dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:stack_rotation="4"></link.fls.swipestack.SwipeStack>
 
-    <com.fashare.stack_layout.StackLayout
-        android:id="@+id/stack_layout"
-        android:layout_width="250dp"
-        android:layout_height="350dp"
+    <ImageView
+        android:id="@+id/choose_shoppingcart_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_shopping_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swipeStack"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/choose_pass_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bezierView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_shopping_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/choose_shoppingcart_iv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </com.fashare.stack_layout.StackLayout>
+        app:layout_constraintTop_toBottomOf="@+id/swipeStack"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/choose_like_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_shopping_like"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/choose_shoppingcart_iv"
+        app:layout_constraintTop_toBottomOf="@+id/swipeStack"
+        tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>

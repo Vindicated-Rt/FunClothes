@@ -94,15 +94,15 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
         cameraActivity.startActivityForResult(intent, CHOOSE_PHOTO);
     }
 
+    /*返回图片地址*/
+    public Uri getImageUri() {
+        return imageUri;
+    }
+
     /*获取当前时间*/
     public String getTime() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH:mm:ss", Locale.getDefault());
         Date date = new Date(System.currentTimeMillis());
         return simpleDateFormat.format(date);
-    }
-
-    /*返回图片地址*/
-    public Uri getImageUri() {
-        return imageUri;
     }
 }

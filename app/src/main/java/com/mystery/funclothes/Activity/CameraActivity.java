@@ -55,10 +55,10 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
 
     /*设置场景数据*/
     @Override
-    public void setData(ScenesInfo scenesInfo, int postion) {
-        cameraScenceTv.animateText(scenesInfo.getTitle(postion));
-        scenceDesTv.animateText(scenesInfo.getDescription(postion));
-        cameraScenesIv.setBackgroundResource(scenesInfo.getImageId(postion));
+    public void setData(int postion) {
+        cameraScenceTv.animateText(ScenesInfo.getInstance().getTitle(postion));
+        scenceDesTv.animateText(ScenesInfo.getInstance().getDescription(postion));
+        cameraScenesIv.setBackgroundResource(ScenesInfo.getInstance().getImageId(postion));
     }
 
     @Override
@@ -110,7 +110,7 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         cameraRecommendIv = findViewById(R.id.camera_recommend_iv);
         cmaeraChooseIv = findViewById(R.id.camera_choose_iv);
         cameraPresenter = new CameraPresenter(this, this);
-        setData(ScenesInfo.getInstance(), position);
+        setData(position);
     }
 
     /*相机按钮点击事件*/

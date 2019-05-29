@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 
 public class ScenesInfo {
+
     private static ScenesInfo instance = new ScenesInfo();
     private ArrayList<Integer> imageIds = new ArrayList<>();
     private ArrayList<String> titles = new ArrayList<>();
@@ -46,7 +47,7 @@ public class ScenesInfo {
         return titles.get(postion);
     }
 
-    public void setImageId() {
+    private void setImageId() {
         imageIds.add(R.mipmap.scenes_1);
         imageIds.add(R.mipmap.scenes_2);
         imageIds.add(R.mipmap.scenes_3);
@@ -57,7 +58,7 @@ public class ScenesInfo {
         imageIds.add(R.mipmap.scenes_8);
     }
 
-    public void setTitle() {
+    private void setTitle() {
         titles.add("教室");
         titles.add("办公室");
         titles.add("旅行");
@@ -68,7 +69,7 @@ public class ScenesInfo {
         titles.add("公园");
     }
 
-    public void setDescription() {
+    private void setDescription() {
         descriptions.add("\t\t\t\t适合日常不夸张，积极向上、朝气蓬勃能体现精神面貌的衣服");
         descriptions.add("\t\t\t\t适合知性、职业、整洁大方能体现专业素养的衣服");
         descriptions.add("\t\t\t\t结合自身特色，舒适且适合拍照，符合当地风土人情避开特殊宗教禁忌");
