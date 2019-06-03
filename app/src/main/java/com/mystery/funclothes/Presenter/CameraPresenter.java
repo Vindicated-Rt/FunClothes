@@ -15,7 +15,7 @@ import android.view.View;
 
 import com.mystery.funclothes.Activity.CameraActivity;
 import com.mystery.funclothes.Base.BaseURL;
-import com.mystery.funclothes.Bean.CameraDialog;
+import com.mystery.funclothes.DesignView.CameraDialog;
 import com.mystery.funclothes.Model.CameraModel;
 import com.mystery.funclothes.R;
 import com.mystery.funclothes.Util.BitmapFactoryUtil;

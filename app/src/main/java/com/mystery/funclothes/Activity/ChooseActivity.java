@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.mystery.funclothes.Adapter.ClothesAdapter;
 import com.mystery.funclothes.Base.BaseURL;
 import com.mystery.funclothes.R;
-
-import link.fls.swipestack.SwipeStack;
 
 
 /**
@@ -20,38 +19,53 @@ import link.fls.swipestack.SwipeStack;
 
 @Route(path = BaseURL.ACTIVITY_URL_CHOOSE)
 public class ChooseActivity extends AppCompatActivity {
+    private SwipeFlingAdapterView chooseSp;
+    private ClothesAdapter clothesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_layout);
-        SwipeStack swipeStack = findViewById(R.id.swipeStack);
-        final ClothesAdapter clothesAdapter = new ClothesAdapter();
-        swipeStack.setAdapter(clothesAdapter);
-        swipeStack.setSwipeProgressListener(new SwipeStack.SwipeProgressListener() {
+        chooseSp = findViewById(R.id.choose_sp);
+        clothesAdapter = new ClothesAdapter();
+        chooseSp.setAdapter(clothesAdapter);
+        chooseSp.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
-            public void onSwipeStart(int position) {
-
-                }
+            public void removeFirstObjectInAdapter() {
+                clothesAdapter.getImageIds().remove(0);
+                clothesAdapter.notifyDataSetChanged();
+            }
 
             @Override
-            public void onSwipeProgress(int position, float progress) {
-                if (progress>0){
-                    clothesAdapter.getViews(position).getChooseItemLikeIv().setAlpha(progress);
-                    clothesAdapter.getViews(position).getChooseItemLikeIv().setVisibility(View.VISIBLE);
-                    clothesAdapter.getViews(position).getChooseItemPassIv().setVisibility(View.GONE);
-                }else {
-                    clothesAdapter.getViews(position).getChooseItemPassIv().setAlpha((0-progress));
-                    clothesAdapter.getViews(position).getChooseItemPassIv().setVisibility(View.VISIBLE);
-                    clothesAdapter.getViews(position).getChooseItemLikeIv().setVisibility(View.GONE);
-                }
+            public void onLeftCardExit(Object o) {
 
             }
 
             @Override
-            public void onSwipeEnd(int position) {
+            public void onRightCardExit(Object o) {
 
+            }
+
+            @Override
+            public void onAdapterAboutToEmpty(int i) {
+                clothesAdapter.setImageId();
+                clothesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onScroll(float v) {
+                View view = chooseSp.getSelectedView();
+                view.findViewById(R.id.choose_item_pass_iv).setAlpha(v < 0 ? -v : 0);
+                view.findViewById(R.id.choose_item_like_iv).setAlpha(v > 0 ? v : 0);
             }
         });
+    }
+
+    public void left(View view) {
+        chooseSp.getTopCardListener().selectLeft();
+    }
+
+    public void right(View view) {
+        chooseSp.getTopCardListener().selectRight();
     }
 }

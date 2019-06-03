@@ -20,7 +20,10 @@ import java.util.List;
 public class ClothesAdapter extends BaseAdapter {
 
     private List<Integer> imageIds = new ArrayList<>();
-    private List<ViewHolder> views = new ArrayList<>();
+
+    public List<Integer> getImageIds() {
+        return imageIds;
+    }
 
     public void setImageId() {
         imageIds.add(R.mipmap.scenes_1);
@@ -57,43 +60,20 @@ public class ClothesAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.choose_cardview, parent, false);
-        ViewHolder viewHolder = new ViewHolder(convertView, position);
+        ViewHolder viewHolder = new ViewHolder(convertView);
         viewHolder.chooseItemIv.setBackgroundResource(imageIds.get(position));
-        views.add(viewHolder);
         return convertView;
     }
 
-    public ViewHolder getViews(int postion) {
-        return views.get(postion);
-    }
-
     public static class ViewHolder {
-        private int _id;
         private ImageView chooseItemIv;
         private ImageView chooseItemLikeIv;
         private ImageView chooseItemPassIv;
 
-        public ViewHolder(View itemView,int position) {
-            _id = position;
+        public ViewHolder(View itemView) {
             chooseItemIv = itemView.findViewById(R.id.choose_item_iv);
             chooseItemLikeIv = itemView.findViewById(R.id.choose_item_like_iv);
             chooseItemPassIv = itemView.findViewById(R.id.choose_item_pass_iv);
-        }
-
-        public int getPosition() {
-            return _id;
-        }
-
-        public ImageView getChooseItemIv() {
-            return chooseItemIv;
-        }
-
-        public ImageView getChooseItemLikeIv() {
-            return chooseItemLikeIv;
-        }
-
-        public ImageView getChooseItemPassIv() {
-            return chooseItemPassIv;
         }
     }
 }

@@ -7,8 +7,8 @@
     android:clipChildren="false"
     tools:context=".Activity.ChooseActivity">
 
-    <link.fls.swipestack.SwipeStack
-        android:id="@+id/swipeStack"
+    <com.lorentzos.flingswipe.SwipeFlingAdapterView
+        android:id="@+id/choose_sp"
         android:layout_width="match_parent"
         android:layout_height="425dp"
         android:layout_marginStart="16dp"
@@ -16,8 +16,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:stack_rotation="4"></link.fls.swipestack.SwipeStack>
+        app:layout_constraintTop_toTopOf="parent"></com.lorentzos.flingswipe.SwipeFlingAdapterView>
 
     <ImageView
         android:id="@+id/choose_shoppingcart_iv"
@@ -31,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swipeStack"
+        app:layout_constraintTop_toBottomOf="@+id/choose_sp"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -42,11 +41,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_shopping_cancel"
+        android:onClick="left"
+        android:src="@drawable/shopping_cancel_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/choose_shoppingcart_iv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swipeStack"
+        app:layout_constraintTop_toBottomOf="@+id/choose_sp"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -57,11 +57,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_shopping_like"
+        android:onClick="right"
+        android:src="@drawable/shopping_like_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/choose_shoppingcart_iv"
-        app:layout_constraintTop_toBottomOf="@+id/swipeStack"
+        app:layout_constraintTop_toBottomOf="@+id/choose_sp"
         tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>

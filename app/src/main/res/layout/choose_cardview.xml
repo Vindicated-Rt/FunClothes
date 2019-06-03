@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:visibility="invisible"
+            android:alpha="0"
             android:src="@drawable/ic_shopping_like"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/choose_item_iv"
@@ -41,7 +41,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:src="@drawable/ic_shopping_cancel"
-            android:visibility="invisible"
+            android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/choose_item_iv"
             tools:ignore="ContentDescription" />

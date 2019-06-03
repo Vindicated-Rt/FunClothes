@@ -1,4 +1,4 @@
-package com.mystery.funclothes.Bean;
+package com.mystery.funclothes.DesignView;
 
 import android.app.Activity;
 import android.app.Dialog;
