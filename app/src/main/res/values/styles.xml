@@ -1,7 +1,6 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -23,6 +22,25 @@
     </style>
 
     <style name="CameraDialogStytle">
-        <item name="android:windowEnterAnimation">@anim/camera_dialog_animation</item>
+        <item name="android:windowEnterAnimation">@anim/camera_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/camera_dialog_exit</item>
     </style>
+
+    <style name="CameraTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">false</item>
+        <item name="android:windowAllowReturnTransitionOverlap">false</item>
+        <item name="android:windowEnterTransition">@transition/camera_transition</item>
+        <item name="android:windowReenterTransition">@transition/camera_transition</item>
+        <item name="android:windowReturnTransition">@transition/camera_transition</item>
+        <item name="android:windowExitAnimation">@transition/camera_transition</item>
+    </style>
+
+    <style name="ChooseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">false</item>
+        <item name="android:windowAllowReturnTransitionOverlap">false</item>
+    </style>
+
 </resources>

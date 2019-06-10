@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:transitionOrdering="together"
+    android:duration="618">
+
+    <slide
+        android:slideEdge="top">
+        <targets>
+            <target android:targetId="@id/camera_picture_cv" />
+        </targets>
+    </slide>
+
+    <slide
+        android:slideEdge="bottom">
+        <targets>
+            <target android:targetId="@id/camera_choose_iv" />
+        </targets>
+    </slide>
+
+    <slide
+        android:slideEdge="right">
+        <targets>
+            <target android:targetId="@id/camera_scenes_tv" />
+        </targets>
+    </slide>
+
+    <slide
+        android:slideEdge="left">
+        <targets>
+            <target android:targetId="@id/camera_scence_Des_tv" />
+        </targets>
+    </slide>
+
+</transitionSet>

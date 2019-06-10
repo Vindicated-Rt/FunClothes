@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/choose_cv"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:alpha="0"
-            android:src="@drawable/ic_shopping_like"
+            android:src="@drawable/ic_like"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/choose_item_iv"
             tools:ignore="ContentDescription" />
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_shopping_cancel"
+            android:src="@drawable/ic_cancel"
             android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/choose_item_iv"

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FunClothes</string>
+    <string name="trainsitionView">sharedView</string>
+    <string name="trainsitionBtn">sharedBtn</string>
 </resources>

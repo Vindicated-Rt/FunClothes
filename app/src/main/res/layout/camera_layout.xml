@@ -27,7 +27,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:transitionName="sharedView"
+        android:transitionName="@string/trainsitionView"
         app:cardCornerRadius="20dp"
         app:cardElevation="@dimen/cardview_compat_inset_shadow"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,9 +51,9 @@
         android:gravity="center"
         android:letterSpacing="0.08"
         android:lineSpacingMultiplier="1.2"
-        app:animationDuration="2000"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/colorWhite"
+        app:animationDuration="2000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera_scenes_cv" />
@@ -76,12 +76,12 @@
 
     <ImageView
         android:id="@+id/camera_choose_iv"
-        android:onClick="cameraBtnClick"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="cameraBtnClick"
         android:src="@mipmap/camera_icon"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,16 +90,49 @@
 
     <ImageView
         android:id="@+id/camera_recommend_iv"
-        android:onClick="ClothesRecommend"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_recommend"
+        android:onClick="ClothesRecommend"
+        android:src="@drawable/home_btn"
         android:visibility="gone"
+        android:transitionName="@string/trainsitionBtn"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/camera_picture_cv"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="100dp"
+        app:cardCornerRadius="20dp"
+        android:visibility="gone"
+        app:cardElevation="@dimen/cardview_compat_inset_shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/camera_scenes_cv">
+
+        <ImageView
+            android:id="@+id/camera_picture_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/camera_scenes_cv"
+            tools:ignore="ContentDescription" />
+    </android.support.v7.widget.CardView>
+
 </android.support.constraint.ConstraintLayout>

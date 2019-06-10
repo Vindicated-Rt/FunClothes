@@ -19,12 +19,12 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
 
         <activity android:name=".Activity.ChooseActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@style/ChooseTheme"
             tools:ignore="InnerclassSeparator"/>
 
         <activity
             android:name=".Activity.CameraActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@style/CameraTheme"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activity.ScenesActivity"

@@ -1,12 +1,15 @@
 package com.mystery.funclothes.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -42,7 +45,11 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     private ImageView cameraScenesIv;
     private ImageView cameraRecommendIv;
     private ImageView cmaeraChooseIv;
+    private ImageView cameraPictureIv;
+    private CardView cameraPictureCv;
+    private CardView cameraScenesCv;
     private CameraPresenter cameraPresenter;
+
     @Autowired
     int position;
 
@@ -64,19 +71,17 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     @Override
     public void setBackground(Bitmap background) {
         Drawable drawable = new BitmapDrawable(getResources(), background);
-        cameraScenesIv.setBackground(drawable);
+        cameraPictureIv.setBackground(drawable);
     }
 
     @Override
-    public void setVisibility(Boolean flag) {
-        if (flag) {
-            cmaeraChooseIv.setVisibility(View.GONE);
-            cameraRecommendIv.setVisibility(View.VISIBLE);
-        } else {
-            cmaeraChooseIv.setVisibility(View.VISIBLE);
-            cameraRecommendIv.setVisibility(View.GONE);
-        }
-
+    public void setVisibility() {
+        cmaeraChooseIv.setVisibility(View.GONE);
+        cameraScenesCv.setVisibility(View.GONE);
+        cameraScenceTv.setVisibility(View.GONE);
+        scenceDesTv.setVisibility(View.GONE);
+        cameraRecommendIv.setVisibility(View.VISIBLE);
+        cameraPictureCv.setVisibility(View.VISIBLE);
     }
 
     /*相册或相机返回图片*/
@@ -87,13 +92,13 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     setBackground(BitmapFactoryUtil.getBitmapByUri(this, cameraPresenter.getImageUri(), 1920, 1080));
-                    setVisibility(true);
+                    setVisibility();
                 }
                 break;
             case CHOOSE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     setBackground(cameraPresenter.handleImage(data));
-                    setVisibility(true);
+                    setVisibility();
                 }
                 break;
             default:
@@ -109,9 +114,12 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         cameraScenesIv = findViewById(R.id.camera_scenes_iv);
         cameraRecommendIv = findViewById(R.id.camera_recommend_iv);
         cmaeraChooseIv = findViewById(R.id.camera_choose_iv);
+        cameraScenesCv = findViewById(R.id.camera_scenes_cv);
+        cameraPictureCv = findViewById(R.id.camera_picture_cv);
+        cameraPictureIv = findViewById(R.id.camera_picture_iv);
         cameraPresenter = new CameraPresenter(this, this);
         setData(position);
-    }
+        }
 
     /*相机按钮点击事件*/
     public void cameraBtnClick(View view) {
@@ -120,6 +128,8 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
 
     /*推荐按钮点击事件*/
     public void ClothesRecommend(View view) {
-        ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE).navigation();
+        ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE)
+                .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation(CameraActivity.this, cameraRecommendIv, "sharedBtn"))
+                .navigation(CameraActivity.this);
     }
 }

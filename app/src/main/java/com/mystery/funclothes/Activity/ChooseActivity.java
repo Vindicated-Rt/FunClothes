@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.mystery.funclothes.Adapter.ClothesAdapter;
 import com.mystery.funclothes.Base.BaseURL;
+import com.mystery.funclothes.Presenter.ChoosePresenter;
 import com.mystery.funclothes.R;
 
 
@@ -22,50 +23,33 @@ public class ChooseActivity extends AppCompatActivity {
     private SwipeFlingAdapterView chooseSp;
     private ClothesAdapter clothesAdapter;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_layout);
-        chooseSp = findViewById(R.id.choose_sp);
-        clothesAdapter = new ClothesAdapter();
-        chooseSp.setAdapter(clothesAdapter);
-        chooseSp.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-            @Override
-            public void removeFirstObjectInAdapter() {
-                clothesAdapter.getImageIds().remove(0);
-                clothesAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onLeftCardExit(Object o) {
-
-            }
-
-            @Override
-            public void onRightCardExit(Object o) {
-
-            }
-
-            @Override
-            public void onAdapterAboutToEmpty(int i) {
-                clothesAdapter.setImageId();
-                clothesAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onScroll(float v) {
-                View view = chooseSp.getSelectedView();
-                view.findViewById(R.id.choose_item_pass_iv).setAlpha(v < 0 ? -v : 0);
-                view.findViewById(R.id.choose_item_like_iv).setAlpha(v > 0 ? v : 0);
-            }
-        });
+        init();
     }
 
-    public void left(View view) {
+    /*初始化视图，设置视图数据*/
+    private void init(){
+        chooseSp = findViewById(R.id.choose_sp);
+        clothesAdapter = new ClothesAdapter();
+        ChoosePresenter choosePresenter = new ChoosePresenter(this,chooseSp,clothesAdapter);
+        chooseSp.setAdapter(clothesAdapter);
+        chooseSp.setFlingListener(choosePresenter.getFlingListener());
+    }
+
+    public void likeBtn(View view) {
         chooseSp.getTopCardListener().selectLeft();
     }
 
-    public void right(View view) {
+    public void dislikeBtn(View view) {
         chooseSp.getTopCardListener().selectRight();
+    }
+
+    public void goShopping(View view) {
     }
 }

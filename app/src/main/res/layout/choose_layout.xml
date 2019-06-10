@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/scenesbackground"
     android:clipChildren="false"
     tools:context=".Activity.ChooseActivity">
 
@@ -16,35 +17,19 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></com.lorentzos.flingswipe.SwipeFlingAdapterView>
-
-    <ImageView
-        android:id="@+id/choose_shoppingcart_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_shopping_cart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose_sp"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent">
+    </com.lorentzos.flingswipe.SwipeFlingAdapterView>
 
     <ImageView
         android:id="@+id/choose_pass_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="left"
-        android:src="@drawable/shopping_cancel_btn"
+        android:onClick="likeBtn"
+        android:src="@drawable/cancel_btn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/choose_shoppingcart_iv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choose_sp"
         tools:ignore="ContentDescription" />
@@ -53,15 +38,30 @@
         android:id="@+id/choose_like_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="dislikeBtn"
+        android:src="@drawable/like_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_sp"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/choose_home_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="right"
-        android:src="@drawable/shopping_like_btn"
+        android:onClick="goShopping"
+        android:src="@drawable/home_btn"
+        android:transitionName="@string/trainsitionBtn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/choose_shoppingcart_iv"
+        app:layout_constraintEnd_toStartOf="@+id/choose_like_iv"
+        app:layout_constraintStart_toEndOf="@+id/choose_pass_iv"
         app:layout_constraintTop_toBottomOf="@+id/choose_sp"
         tools:ignore="ContentDescription" />
 

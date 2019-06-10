@@ -20,6 +20,15 @@ import java.util.List;
 public class ClothesAdapter extends BaseAdapter {
 
     private List<Integer> imageIds = new ArrayList<>();
+    private Boolean flag = false;
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
 
     public List<Integer> getImageIds() {
         return imageIds;
