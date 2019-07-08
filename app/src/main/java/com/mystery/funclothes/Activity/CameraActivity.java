@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.cazaea.sweetalert.SweetAlertDialog;
 import com.hanks.htextview.fade.FadeTextView;
 import com.hanks.htextview.typer.TyperTextView;
 import com.mystery.funclothes.Base.BaseURL;
@@ -50,6 +52,8 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     private CardView cameraScenesCv;
     private CameraPresenter cameraPresenter;
 
+    private String result = "123";
+
     @Autowired
     int position;
 
@@ -75,13 +79,24 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     }
 
     @Override
-    public void setVisibility() {
-        cmaeraChooseIv.setVisibility(View.GONE);
-        cameraScenesCv.setVisibility(View.GONE);
-        cameraScenceTv.setVisibility(View.GONE);
-        scenceDesTv.setVisibility(View.GONE);
-        cameraRecommendIv.setVisibility(View.VISIBLE);
-        cameraPictureCv.setVisibility(View.VISIBLE);
+    public void setVisibility(boolean flag) {
+        if (flag){
+            cameraPictureCv.setVisibility(View.GONE);
+            cameraRecommendIv.setVisibility(View.GONE);
+            cameraScenceTv.setVisibility(View.VISIBLE);
+            scenceDesTv.setVisibility(View.VISIBLE);
+            cameraScenesIv.setVisibility(View.VISIBLE);
+            cmaeraChooseIv.setVisibility(View.VISIBLE);
+            cameraScenesCv.setVisibility(View.VISIBLE);
+        }else {
+            cameraPictureCv.setVisibility(View.VISIBLE);
+            cameraRecommendIv.setVisibility(View.VISIBLE);
+            cameraScenceTv.setVisibility(View.GONE);
+            scenceDesTv.setVisibility(View.GONE);
+            cameraScenesIv.setVisibility(View.GONE);
+            cmaeraChooseIv.setVisibility(View.GONE);
+            cameraScenesCv.setVisibility(View.GONE);
+        }
     }
 
     /*相册或相机返回图片*/
@@ -92,13 +107,13 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     setBackground(BitmapFactoryUtil.getBitmapByUri(this, cameraPresenter.getImageUri(), 1920, 1080));
-                    setVisibility();
+                    setVisibility(false);
                 }
                 break;
             case CHOOSE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     setBackground(cameraPresenter.handleImage(data));
-                    setVisibility();
+                    setVisibility(false);
                 }
                 break;
             default:
@@ -128,8 +143,49 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
 
     /*推荐按钮点击事件*/
     public void ClothesRecommend(View view) {
-        ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE)
-                .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation(CameraActivity.this, cameraRecommendIv, "sharedBtn"))
-                .navigation(CameraActivity.this);
+        final SweetAlertDialog loading = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        loading.setTitleText("Loading").setCancelable(false);
+        loading.show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap postPic = BitmapFactoryUtil.getBitmapByView(cameraPictureIv,224,224);
+            }
+        }).start();
+        new CountDownTimer(1000*10,1000){
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                if(result != null && !result.equals("")){
+                    loading.setTitleText("Success!")
+                            .setConfirmText("OK")
+                            .showConfirmButton(true)
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE).navigation();
+                                    loading.cancel();
+                                    setVisibility(true);
+                                }
+                            })
+                            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                }else {
+                    loading.setTitleText("无法连接网络或推荐系统出错")
+                            .setConfirmText("好吧")
+                            .changeAlertType(SweetAlertDialog.WARNING_TYPE);
+                }
+            }
+        }.start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }).start();
     }
 }

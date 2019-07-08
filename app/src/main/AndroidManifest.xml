@@ -17,11 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
-
-        <activity android:name=".Activity.ChooseActivity"
+        <activity android:name=".Activity.ShopActivity"></activity>
+        <activity
+            android:name=".Activity.ChooseActivity"
             android:theme="@style/ChooseTheme"
-            tools:ignore="InnerclassSeparator"/>
-
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activity.CameraActivity"
             android:theme="@style/CameraTheme"

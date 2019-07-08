@@ -8,7 +8,6 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -40,7 +39,6 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
     //滑动库
     implementation 'com.lorentzos.swipecards:library:1.0.9'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.camera_dialog_exit:runner:1.0.2'
-    androidTestImplementation 'com.android.support.camera_dialog_exit.espresso:espresso-core:3.0.2'
+    //dailog
+    implementation 'com.github.cazaea:sweet-alert-dialog:1.0.0'
 }

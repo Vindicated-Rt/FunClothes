@@ -12,6 +12,7 @@ public final class BaseURL {
     public static final String ACTIVITY_URL_SCENES = "/activities/scenes";
     public static final String ACTIVITY_URL_CAMERA = "/activities/camera";
     public static final String ACTIVITY_URL_CHOOSE = "/activities/choose";
+    public static final String ACTIVITY_URL_SHOP = "/activities/shop";
 
     public static final String DOCUMENTS_URL = "com.android.providers.media.documents";
     public static final String DOWNLOADS_URL = "com.android.providers.downloads.documents";
@@ -19,4 +20,6 @@ public final class BaseURL {
     public static final String INTENT_URL_GETCONTENT = "android.intent.action.GET_CONTENT";
     public static final String INTENT_URL_IMAGECAPTURE = "android.media.action.IMAGE_CAPTURE";
     public static final String PACKAGE_FILEPROVIDER = "com.mystery.funclothes.fileprovider";
+
+    public static final String TAOBAO_PACKAGE = "com.taobao.taobao";
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.mystery.funclothes.Adapter.ClothesAdapter;
 import com.mystery.funclothes.Base.BaseURL;
@@ -51,5 +52,6 @@ public class ChooseActivity extends AppCompatActivity {
     }
 
     public void goShopping(View view) {
+        ARouter.getInstance().build(BaseURL.ACTIVITY_URL_SHOP).navigation();
     }
 }

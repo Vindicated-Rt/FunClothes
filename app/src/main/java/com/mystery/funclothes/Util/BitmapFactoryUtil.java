@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.Uri;
+import android.view.View;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -123,6 +126,19 @@ public class BitmapFactoryUtil {
         options.inJustDecodeBounds = false;
         options.inSampleSize = inSampleSize;
         return BitmapFactory.decodeByteArray(data, 0, data.length, options);
+    }
+
+    /*从视图获取*/
+    public static Bitmap getBitmapByView(View v, int width, int height) {
+        int measuredWidth = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY);
+        int measuredHeight = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY);
+        v.measure(measuredWidth, measuredHeight);
+        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+        Bitmap bmp = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmp);
+        c.drawColor(Color.WHITE);
+        v.draw(c);
+        return bmp;
     }
 
 }

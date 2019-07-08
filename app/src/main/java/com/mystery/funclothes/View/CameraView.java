@@ -7,5 +7,5 @@ import com.mystery.funclothes.Bean.ScenesInfo;
 public interface CameraView {
     void setData(int postion);
     void setBackground(Bitmap background);
-    void setVisibility();
+    void setVisibility(boolean flag);
 }
