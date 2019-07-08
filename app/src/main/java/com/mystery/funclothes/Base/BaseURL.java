@@ -21,5 +21,7 @@ public final class BaseURL {
     public static final String INTENT_URL_IMAGECAPTURE = "android.media.action.IMAGE_CAPTURE";
     public static final String PACKAGE_FILEPROVIDER = "com.mystery.funclothes.fileprovider";
 
+    public static final String VINDICATEDRT_URL = "<a href='https://github.com/Vindicated-Rt'>Vindicated_Rt</a>";
+    public static final String BOBHONGYUCHEN_URL = "<a href='https://github.com/BobHongYuChen'>BobHongYuChen</a>";
     public static final String TAOBAO_PACKAGE = "com.taobao.taobao";
 }

@@ -2,4 +2,9 @@
     <string name="app_name">FunClothes</string>
     <string name="trainsitionView">sharedView</string>
     <string name="trainsitionBtn">sharedBtn</string>
+    <string name="about_tv_text">一款智能推荐服装的app\n有玄机工作室制作</string>
+    <string name="developer_tv_text">Developer</string>
+    <string name="vindicatedrt_tv_text">Vindicated_Rt</string>
+    <string name="thank_tv_text">Thanks</string>
+    <string name="bobhongyuchen_tv_text">BobHongYuChen</string>
 </resources>

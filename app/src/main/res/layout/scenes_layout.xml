@@ -35,7 +35,7 @@
         android:layout_gravity="start"
         android:orientation="vertical">
 
-        <include layout="@layout/scenes_drawer_layout" />
+        <include layout="@layout/about_layout" />
     </LinearLayout>
 
 

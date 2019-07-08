@@ -3,6 +3,9 @@ package com.mystery.funclothes.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mystery.funclothes.Base.BaseURL;
@@ -18,16 +21,29 @@ import com.mystery.funclothes.R;
 @Route(path = BaseURL.ACTIVITY_URL_SCENES)
 public class ScenesActivity extends AppCompatActivity {
 
+
+    private TextView VindicatedTv;
+    private TextView BobHongYuChenTv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scenes_layout);
         initView();
+        setHtml();
     }
 
     private void initView() {
+        VindicatedTv = findViewById(R.id.Vindicated_tv);
+        BobHongYuChenTv = findViewById(R.id.BobHongYuChen_tv);
         RecyclerView scenes_rv = findViewById(R.id.scenes_rl);
         ScenesPresenter scenesPresenter = new ScenesPresenter(this, scenes_rv);
         scenesPresenter.initDatas();
+    }
+
+    private void setHtml(){
+        VindicatedTv.setMovementMethod(LinkMovementMethod.getInstance());
+        VindicatedTv.setText(Html.fromHtml(BaseURL.VINDICATEDRT_URL));
+        BobHongYuChenTv.setMovementMethod(LinkMovementMethod.getInstance());
+        BobHongYuChenTv.setText(Html.fromHtml(BaseURL.BOBHONGYUCHEN_URL));
     }
 }
