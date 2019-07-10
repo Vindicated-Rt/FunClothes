@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.view.View;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -110,6 +111,7 @@ public class BitmapFactoryUtil {
 
     /*从二进制数组获取*/
     public static Bitmap getBitmapByByteArray(byte[] data, int width, int height) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeByteArray(data, 0, data.length, options);

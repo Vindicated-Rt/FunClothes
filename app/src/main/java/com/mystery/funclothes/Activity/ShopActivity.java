@@ -6,11 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.mystery.funclothes.Adapter.ScenesAdapter;
 import com.mystery.funclothes.Adapter.ShopAdapter;
 import com.mystery.funclothes.Base.BaseURL;
-import com.mystery.funclothes.Bean.ScenesInfo;
-import com.mystery.funclothes.Bean.ShopInfo;
 import com.mystery.funclothes.R;
 import com.mystery.funclothes.Util.ItemDecorationUtil;
 @Route(path = BaseURL.ACTIVITY_URL_SHOP)

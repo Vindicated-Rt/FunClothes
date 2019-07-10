@@ -1,16 +1,17 @@
 package com.mystery.funclothes.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -21,11 +22,17 @@ import com.cazaea.sweetalert.SweetAlertDialog;
 import com.hanks.htextview.fade.FadeTextView;
 import com.hanks.htextview.typer.TyperTextView;
 import com.mystery.funclothes.Base.BaseURL;
-import com.mystery.funclothes.Bean.ScenesInfo;
+import com.mystery.funclothes.Bean.StyleInfo;
 import com.mystery.funclothes.Presenter.CameraPresenter;
 import com.mystery.funclothes.R;
 import com.mystery.funclothes.Util.BitmapFactoryUtil;
+import com.mystery.funclothes.Util.HttpUtil;
 import com.mystery.funclothes.View.CameraView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by Vindicated-Rt
@@ -52,7 +59,8 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     private CardView cameraScenesCv;
     private CameraPresenter cameraPresenter;
 
-    private String result = "123";
+    private String result;
+    private String string;
 
     @Autowired
     int position;
@@ -67,9 +75,9 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     /*设置场景数据*/
     @Override
     public void setData(int postion) {
-        cameraScenceTv.animateText(ScenesInfo.getInstance().getTitle(postion));
-        scenceDesTv.animateText(ScenesInfo.getInstance().getDescription(postion));
-        cameraScenesIv.setBackgroundResource(ScenesInfo.getInstance().getImageId(postion));
+        cameraScenceTv.animateText(StyleInfo.getInstance().getTitle(postion));
+        scenceDesTv.animateText(StyleInfo.getInstance().getDescription(postion));
+        cameraScenesIv.setBackgroundResource(StyleInfo.getInstance().getImageId(postion));
     }
 
     @Override
@@ -150,9 +158,24 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
             @Override
             public void run() {
                 Bitmap postPic = BitmapFactoryUtil.getBitmapByView(cameraPictureIv,224,224);
+                JSONObject obj = new JSONObject();
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                postPic.compress(Bitmap.CompressFormat.PNG, 100, bos);
+                byte[] bytes = bos.toByteArray();
+                string = Base64.encodeToString(bytes, Base64.DEFAULT);
+                try {
+                    obj.put("pic",string);
+                    Log.i(BaseURL.TAG,"发送："+bytes);
+                    result = HttpUtil.post(BaseURL.WHF_URL,obj);
+                    Log.i(BaseURL.TAG,"链接成功："+result);
+                    bos.close();
+                } catch (Exception e) {
+                    Log.i(BaseURL.TAG,"链接失败");
+                    e.printStackTrace();
+                }
             }
         }).start();
-        new CountDownTimer(1000*10,1000){
+        new CountDownTimer(1000*12,1000){
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -167,9 +190,24 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE).navigation();
+                                    /*ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE).navigation();
+                                    loading.cancel();
+                                    setVisibility(true);*/
                                     loading.cancel();
                                     setVisibility(true);
+                                    JSONObject jsonObject = null;
+                                    try {
+                                        jsonObject = new JSONObject(result);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    String pic = jsonObject.optString("pic");
+                                    Log.i(BaseURL.TAG, "onClick: "+pic.length());
+                                    scenceDesTv.animateText(pic);
+                                    byte[] bytes = Base64.decode(pic, Base64.DEFAULT);
+
+                                    Bitmap bitmap =BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    cameraScenesIv.setImageBitmap(bitmap);
                                 }
                             })
                             .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);

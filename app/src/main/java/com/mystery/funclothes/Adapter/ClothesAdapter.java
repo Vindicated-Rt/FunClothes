@@ -35,14 +35,14 @@ public class ClothesAdapter extends BaseAdapter {
     }
 
     public void setImageId() {
-        imageIds.add(R.mipmap.scenes_1);
-        imageIds.add(R.mipmap.scenes_2);
-        imageIds.add(R.mipmap.scenes_3);
-        imageIds.add(R.mipmap.scenes_4);
-        imageIds.add(R.mipmap.scenes_5);
-        imageIds.add(R.mipmap.scenes_6);
-        imageIds.add(R.mipmap.scenes_7);
-        imageIds.add(R.mipmap.scenes_8);
+        imageIds.add(R.mipmap.style_1);
+        imageIds.add(R.mipmap.style_2);
+        imageIds.add(R.mipmap.style_3);
+        imageIds.add(R.mipmap.style_4);
+        imageIds.add(R.mipmap.style_5);
+        imageIds.add(R.mipmap.style_6);
+        imageIds.add(R.mipmap.style_7);
+        imageIds.add(R.mipmap.style_8);
     }
 
     public ClothesAdapter() {

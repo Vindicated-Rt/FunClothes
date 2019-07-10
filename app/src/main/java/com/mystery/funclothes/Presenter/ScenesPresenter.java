@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.mystery.funclothes.Adapter.ScenesAdapter;
-import com.mystery.funclothes.Bean.ScenesInfo;
+import com.mystery.funclothes.Adapter.StyleAdapter;
+import com.mystery.funclothes.Bean.StyleInfo;
 import com.mystery.funclothes.Model.ScenesModel;
 import com.mystery.funclothes.Util.ItemDecorationUtil;
 
@@ -29,7 +29,7 @@ public class ScenesPresenter implements ScenesModel {
     @Override
     public void initDatas() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRecyclerView.setAdapter(new ScenesAdapter(ScenesInfo.getInstance()));
+        mRecyclerView.setAdapter(new StyleAdapter(StyleInfo.getInstance()));
         mRecyclerView.addItemDecoration(new ItemDecorationUtil(20));
     }
 }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.mystery.funclothes.Base.BaseURL;
-import com.mystery.funclothes.Bean.ScenesInfo;
+import com.mystery.funclothes.Bean.StyleInfo;
 import com.mystery.funclothes.R;
 
 
@@ -21,12 +21,12 @@ import com.mystery.funclothes.R;
  * 场景 RecyclerView 适配器
  */
 
-public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder> {
+public class StyleAdapter extends RecyclerView.Adapter<StyleAdapter.ViewHolder> {
 
-    private ScenesInfo scenesInfo;//场景数据对象
+    private StyleInfo styleInfo;//场景数据对象
 
-    public ScenesAdapter(ScenesInfo scenesInfo) {
-        this.scenesInfo = scenesInfo;
+    public StyleAdapter(StyleInfo styleInfo) {
+        this.styleInfo = styleInfo;
     }
 
     @Override
@@ -38,8 +38,8 @@ public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.scenesImage.setBackgroundResource(scenesInfo.getImageId(i));
-        viewHolder.scenesDescription.setText(scenesInfo.getTitle(i));
+        viewHolder.scenesImage.setBackgroundResource(styleInfo.getImageId(i));
+        viewHolder.scenesDescription.setText(styleInfo.getTitle(i));
         final int position = i;
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +54,7 @@ public class ScenesAdapter extends RecyclerView.Adapter<ScenesAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return scenesInfo.getSize();
+        return styleInfo.getSize();
     }
 
     /*ItemView -- CardView*/

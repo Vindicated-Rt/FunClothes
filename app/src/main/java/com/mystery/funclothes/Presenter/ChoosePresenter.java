@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.mystery.funclothes.Adapter.ClothesAdapter;
-import com.mystery.funclothes.Bean.ScenesInfo;
 import com.mystery.funclothes.Bean.ShopInfo;
 import com.mystery.funclothes.R;
 import com.mystery.funclothes.Util.BitmapFactoryUtil;

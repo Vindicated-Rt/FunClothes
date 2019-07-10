@@ -9,7 +9,7 @@ public final class BaseURL {
     public static final String TAG = "TAG";
 
     public static final String ACTIVITY_URL_SPLASH = "/activities/splash";
-    public static final String ACTIVITY_URL_SCENES = "/activities/scenes";
+    public static final String ACTIVITY_URL_STYLE = "/activities/style";
     public static final String ACTIVITY_URL_CAMERA = "/activities/camera";
     public static final String ACTIVITY_URL_CHOOSE = "/activities/choose";
     public static final String ACTIVITY_URL_SHOP = "/activities/shop";
@@ -24,4 +24,7 @@ public final class BaseURL {
     public static final String VINDICATEDRT_URL = "<a href='https://github.com/Vindicated-Rt'>Vindicated_Rt</a>";
     public static final String BOBHONGYUCHEN_URL = "<a href='https://github.com/BobHongYuChen'>BobHongYuChen</a>";
     public static final String TAOBAO_PACKAGE = "com.taobao.taobao";
+
+    public static final String WHF_URL = "http://192.168.10.166:8888/register";
+    public static final String BAIDU = "https://www.baidu.com";
 }

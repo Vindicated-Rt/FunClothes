@@ -18,8 +18,8 @@ import com.mystery.funclothes.R;
  * 选择场景页面
  * 显示各种场景
  */
-@Route(path = BaseURL.ACTIVITY_URL_SCENES)
-public class ScenesActivity extends AppCompatActivity {
+@Route(path = BaseURL.ACTIVITY_URL_STYLE)
+public class StyleActivity extends AppCompatActivity {
 
 
     private TextView VindicatedTv;
