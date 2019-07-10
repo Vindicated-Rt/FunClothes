@@ -11,6 +11,7 @@ import android.view.View;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -143,4 +144,10 @@ public class BitmapFactoryUtil {
         return bmp;
     }
 
+    /*从bitmap转byte*/
+    public static byte[] getByteByBitmap(Bitmap bitmap){
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+        return bos.toByteArray();
+    }
 }

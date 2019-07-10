@@ -1,62 +1,40 @@
 package com.mystery.funclothes.Adapter;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.mystery.funclothes.Bean.ClothesInfo;
 import com.mystery.funclothes.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * Created by Vindicated-Rt
  * 2019/5/19 2:01 AM
+ * 推荐衣服视图 适配器
  */
 public class ClothesAdapter extends BaseAdapter {
 
-    private List<Integer> imageIds = new ArrayList<>();
-    private Boolean flag = false;
-
-    public Boolean getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
-    }
-
-    public List<Integer> getImageIds() {
-        return imageIds;
-    }
-
-    public void setImageId() {
-        imageIds.add(R.mipmap.style_1);
-        imageIds.add(R.mipmap.style_2);
-        imageIds.add(R.mipmap.style_3);
-        imageIds.add(R.mipmap.style_4);
-        imageIds.add(R.mipmap.style_5);
-        imageIds.add(R.mipmap.style_6);
-        imageIds.add(R.mipmap.style_7);
-        imageIds.add(R.mipmap.style_8);
-    }
+    private ArrayList<Bitmap> bitmaps;
 
     public ClothesAdapter() {
-        setImageId();
+        bitmaps = ClothesInfo.getInstance().getClothes();
     }
 
     @Override
     public int getCount() {
-        return imageIds.size();
+        return  bitmaps.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return imageIds.get(position);
+        return  bitmaps.get(position);
     }
 
     @Override
@@ -70,7 +48,7 @@ public class ClothesAdapter extends BaseAdapter {
         convertView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.choose_cardview, parent, false);
         ViewHolder viewHolder = new ViewHolder(convertView);
-        viewHolder.chooseItemIv.setBackgroundResource(imageIds.get(position));
+        viewHolder.chooseItemIv.setImageBitmap(bitmaps.get(position));
         return convertView;
     }
 
@@ -84,5 +62,9 @@ public class ClothesAdapter extends BaseAdapter {
             chooseItemLikeIv = itemView.findViewById(R.id.choose_item_like_iv);
             chooseItemPassIv = itemView.findViewById(R.id.choose_item_pass_iv);
         }
+    }
+
+    public ArrayList<Bitmap> getBitmaps() {
+        return bitmaps;
     }
 }

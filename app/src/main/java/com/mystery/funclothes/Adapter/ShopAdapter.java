@@ -1,6 +1,5 @@
 package com.mystery.funclothes.Adapter;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -24,6 +23,7 @@ import com.mystery.funclothes.R;
 /**
  * Created by Vindicated-Rt
  * 2019/7/8 10:35 PM
+ * 购物车 适配器
  */
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
 

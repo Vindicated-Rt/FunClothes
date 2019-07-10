@@ -21,26 +21,28 @@ import com.mystery.funclothes.R;
 @Route(path = BaseURL.ACTIVITY_URL_STYLE)
 public class StyleActivity extends AppCompatActivity {
 
-
     private TextView VindicatedTv;
     private TextView BobHongYuChenTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scenes_layout);
+        setContentView(R.layout.style_layout);
         initView();
         setHtml();
     }
 
+    /*初始化视图*/
     private void initView() {
         VindicatedTv = findViewById(R.id.Vindicated_tv);
         BobHongYuChenTv = findViewById(R.id.BobHongYuChen_tv);
-        RecyclerView scenes_rv = findViewById(R.id.scenes_rl);
+        RecyclerView scenes_rv = findViewById(R.id.style_rl);
         ScenesPresenter scenesPresenter = new ScenesPresenter(this, scenes_rv);
         scenesPresenter.initDatas();
     }
 
-    private void setHtml(){
+    /*绑定html跳转*/
+    private void setHtml() {
         VindicatedTv.setMovementMethod(LinkMovementMethod.getInstance());
         VindicatedTv.setText(Html.fromHtml(BaseURL.VINDICATEDRT_URL));
         BobHongYuChenTv.setMovementMethod(LinkMovementMethod.getInstance());

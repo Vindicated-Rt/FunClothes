@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera_scenes_tv"
-        app:typerSpeed="60" />
+        app:typerSpeed="40" />
 
     <ImageView
         android:id="@+id/camera_choose_iv"
@@ -97,8 +97,8 @@
         android:layout_marginBottom="8dp"
         android:onClick="ClothesRecommend"
         android:src="@drawable/home_btn"
-        android:visibility="gone"
         android:transitionName="@string/trainsitionBtn"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,8 +112,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="100dp"
-        app:cardCornerRadius="20dp"
         android:visibility="gone"
+        app:cardCornerRadius="20dp"
         app:cardElevation="@dimen/cardview_compat_inset_shadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

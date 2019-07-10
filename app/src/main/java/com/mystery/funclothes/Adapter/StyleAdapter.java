@@ -31,7 +31,7 @@ public class StyleAdapter extends RecyclerView.Adapter<StyleAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.scenes_cardview, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.style_cardview, viewGroup, false);
         return new ViewHolder(view);
 
     }
@@ -63,8 +63,8 @@ public class StyleAdapter extends RecyclerView.Adapter<StyleAdapter.ViewHolder> 
         public TextView scenesDescription;
         public ViewHolder(View itemView) {
             super(itemView);
-            scenesImage = itemView.findViewById(R.id.scence_pic);
-            scenesDescription = itemView.findViewById(R.id.scence_des);
+            scenesImage = itemView.findViewById(R.id.style_pic);
+            scenesDescription = itemView.findViewById(R.id.style_des);
         }
     }
 }

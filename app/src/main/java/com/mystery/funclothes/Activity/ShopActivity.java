@@ -10,11 +10,17 @@ import com.mystery.funclothes.Adapter.ShopAdapter;
 import com.mystery.funclothes.Base.BaseURL;
 import com.mystery.funclothes.R;
 import com.mystery.funclothes.Util.ItemDecorationUtil;
+
+/**
+ * Created by Vindicated-Rt
+ * 2019/7/5 8:30 PM
+ * 购物车界面
+ */
+
 @Route(path = BaseURL.ACTIVITY_URL_SHOP)
 public class ShopActivity extends AppCompatActivity {
 
     private RecyclerView shopRv;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,7 @@ public class ShopActivity extends AppCompatActivity {
         initView();
     }
 
+    /*初始化视图*/
     private void initView(){
         shopRv = findViewById(R.id.shop_rv);
         shopRv.setLayoutManager(new LinearLayoutManager(this));

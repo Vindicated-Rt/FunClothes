@@ -15,7 +15,7 @@
         android:layout_height="200dp">
 
         <ImageView
-            android:id="@+id/scence_pic"
+            android:id="@+id/style_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="0dp"
@@ -30,7 +30,7 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/scence_des"
+            android:id="@+id/style_des"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -40,7 +40,7 @@
             android:gravity="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textColor="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="@+id/scence_pic"
+            app:layout_constraintBottom_toBottomOf="@+id/style_pic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>

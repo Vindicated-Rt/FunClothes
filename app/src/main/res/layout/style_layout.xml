@@ -12,7 +12,7 @@
         android:background="@mipmap/scenesbackground">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/scenes_rl"
+            android:id="@+id/style_rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -29,7 +29,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/scenes_left_drawer"
+        android:id="@+id/style_left_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"

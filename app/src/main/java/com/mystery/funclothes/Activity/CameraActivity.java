@@ -22,6 +22,7 @@ import com.cazaea.sweetalert.SweetAlertDialog;
 import com.hanks.htextview.fade.FadeTextView;
 import com.hanks.htextview.typer.TyperTextView;
 import com.mystery.funclothes.Base.BaseURL;
+import com.mystery.funclothes.Bean.ClothesInfo;
 import com.mystery.funclothes.Bean.StyleInfo;
 import com.mystery.funclothes.Presenter.CameraPresenter;
 import com.mystery.funclothes.R;
@@ -32,14 +33,13 @@ import com.mystery.funclothes.View.CameraView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-
 /**
  * Created by Vindicated-Rt
  * 2019/5/13 8:00 PM
  * 相机页面
  * 显示当前场景的信息
- * 并链接至相机拍照（待完成）
+ * 并调用系统相机拍照或调用系统相册取图
+ * 向服务器发送图片
  */
 
 @Route(path = BaseURL.ACTIVITY_URL_CAMERA)
@@ -59,8 +59,9 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
     private CardView cameraScenesCv;
     private CameraPresenter cameraPresenter;
 
-    private String result;
-    private String string;
+    private String result;// 返回结果
+    private String content;// 发送请求
+    private String encodeString;// 转换字符
 
     @Autowired
     int position;
@@ -86,9 +87,10 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         cameraPictureIv.setBackground(drawable);
     }
 
+    /*设置视图切换的显隐藏*/
     @Override
     public void setVisibility(boolean flag) {
-        if (flag){
+        if (flag) {
             cameraPictureCv.setVisibility(View.GONE);
             cameraRecommendIv.setVisibility(View.GONE);
             cameraScenceTv.setVisibility(View.VISIBLE);
@@ -96,7 +98,7 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
             cameraScenesIv.setVisibility(View.VISIBLE);
             cmaeraChooseIv.setVisibility(View.VISIBLE);
             cameraScenesCv.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             cameraPictureCv.setVisibility(View.VISIBLE);
             cameraRecommendIv.setVisibility(View.VISIBLE);
             cameraScenceTv.setVisibility(View.GONE);
@@ -142,7 +144,7 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         cameraPictureIv = findViewById(R.id.camera_picture_iv);
         cameraPresenter = new CameraPresenter(this, this);
         setData(position);
-        }
+    }
 
     /*相机按钮点击事件*/
     public void cameraBtnClick(View view) {
@@ -154,76 +156,76 @@ public class CameraActivity extends AppCompatActivity implements CameraView {
         final SweetAlertDialog loading = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         loading.setTitleText("Loading").setCancelable(false);
         loading.show();
+        /*开启post请求线程*/
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Bitmap postPic = BitmapFactoryUtil.getBitmapByView(cameraPictureIv,224,224);
-                JSONObject obj = new JSONObject();
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                postPic.compress(Bitmap.CompressFormat.PNG, 100, bos);
-                byte[] bytes = bos.toByteArray();
-                string = Base64.encodeToString(bytes, Base64.DEFAULT);
+                Bitmap postPic = BitmapFactoryUtil.getBitmapByView(cameraPictureIv, 224, 224);
+                byte[] postBytes = BitmapFactoryUtil.getByteByBitmap(postPic);
+                encodeString = Base64.encodeToString(postBytes, Base64.DEFAULT);
                 try {
-                    obj.put("pic",string);
-                    Log.i(BaseURL.TAG,"发送："+bytes);
-                    result = HttpUtil.post(BaseURL.WHF_URL,obj);
-                    Log.i(BaseURL.TAG,"链接成功："+result);
-                    bos.close();
+                    JSONObject postObj = new JSONObject();
+                    postObj.put("pic", encodeString);
+                    if (position < 6) {
+                        postObj.put("label", "top");
+                    } else {
+                        postObj.put("label", "bottom");
+                    }
+                    postObj.put("tag", StyleInfo.getInstance().getTag(position));
+                    content = String.valueOf(postObj);
+                    result = HttpUtil.post(BaseURL.WHF_URL, content);
                 } catch (Exception e) {
-                    Log.i(BaseURL.TAG,"链接失败");
+                    Log.i(BaseURL.TAG, "链接失败");
                     e.printStackTrace();
                 }
             }
         }).start();
-        new CountDownTimer(1000*12,1000){
+
+        /*进度条检测计时器*/
+        new CountDownTimer(1000 * 14, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
             }
 
+            /*关闭进度计时器条件*/
             @Override
             public void onFinish() {
-                if(result != null && !result.equals("")){
+                if (result != null && !result.equals("")) {
                     loading.setTitleText("Success!")
                             .setConfirmText("OK")
                             .showConfirmButton(true)
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    /*ARouter.getInstance().build(BaseURL.ACTIVITY_URL_CHOOSE).navigation();
-                                    loading.cancel();
-                                    setVisibility(true);*/
+                                    ARouter.getInstance()
+                                            .build(BaseURL.ACTIVITY_URL_CHOOSE)
+                                            .withString("content", content)
+                                            .navigation();
                                     loading.cancel();
                                     setVisibility(true);
-                                    JSONObject jsonObject = null;
                                     try {
-                                        jsonObject = new JSONObject(result);
+                                        ClothesInfo.getInstance().clearImage();
+                                        JSONObject jsonObject = new JSONObject(result);
+                                        for (int i = 0; i < 8; i++) {
+                                            String pic = jsonObject.optString("pic_"+i);
+                                            byte[] resultBytes = Base64.decode(pic, Base64.DEFAULT);
+                                            Bitmap bitmap = BitmapFactory.decodeByteArray(resultBytes, 0, resultBytes.length);
+                                            ClothesInfo.getInstance().addInfo(bitmap);
+                                        }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    String pic = jsonObject.optString("pic");
-                                    Log.i(BaseURL.TAG, "onClick: "+pic.length());
-                                    scenceDesTv.animateText(pic);
-                                    byte[] bytes = Base64.decode(pic, Base64.DEFAULT);
-
-                                    Bitmap bitmap =BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                    cameraScenesIv.setImageBitmap(bitmap);
                                 }
                             })
                             .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                }else {
+                } else {
                     loading.setTitleText("无法连接网络或推荐系统出错")
                             .setConfirmText("好吧")
                             .changeAlertType(SweetAlertDialog.WARNING_TYPE);
+                    setVisibility(true);
                 }
             }
         }.start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }).start();
     }
 }

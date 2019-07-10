@@ -25,6 +25,7 @@ public final class BaseURL {
     public static final String BOBHONGYUCHEN_URL = "<a href='https://github.com/BobHongYuChen'>BobHongYuChen</a>";
     public static final String TAOBAO_PACKAGE = "com.taobao.taobao";
 
-    public static final String WHF_URL = "http://192.168.10.166:8888/register";
+    public static final String WHF_URL = "http://192.168.10.167:8888/funclothes";
+    //public static final String WHF_URL = "http://192.168.10.166:8888/register";
     public static final String BAIDU = "https://www.baidu.com";
 }
