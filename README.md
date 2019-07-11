@@ -10,3 +10,5 @@ a new Clothing_Recommendation app called FunClothes
 2019/5/13 完成拍照&相册功能，进入图片处理阶段
 
 2019/5/17 托管代码至github，继续进行图片处理
+
+2019/7/10 完成所有界面设计，与服务器交互完成，基本完工。
